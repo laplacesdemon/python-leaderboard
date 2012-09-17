@@ -42,3 +42,70 @@ file in the top distribution directory for the full license text.
 
 .. # vim: syntax=rst expandtab tabstop=4 shiftwidth=4 shiftround
 
+Installation
+============
+
+Add 'leaderboard' folder to your path or issue 'pip install leaderboard'.
+
+Usage
+=====
+
+Creating a leaderboard
+----------------------
+
+Be sure to require the leaderboard library:
+
+``from sth``
+
+
+``from leaderboard import Leaderboard``
+
+
+Create a new leaderboard or attach to an existing leaderboard named 'highscores':
+
+``
+highscore_lb = Leaderboard('highscores')
+``
+
+Ranking members in the leaderboard
+----------------------------------
+
+Add members to your leaderboard using rank_member:
+
+for x in range(0, 10):
+        highscore_lb.rank_member("member_#%s" % x, x)
+
+You can call rank_member with the same member and the leaderboard will be updated automatically.
+
+``highscore_lb.total_members``
+    
+Retrieving members from the leaderboard
+---------------------------------------
+
+Get page 1 in the leaderboard:
+
+Get some information about your leaderboard:
+
+``highscore_lb.total_members()``
+``highscore_lb.total_pages()``
+
+The `rank_member` call will also accept an optional hash of member data that could
+be used to store other information about a given member in the leaderboard. This
+may be useful in situations where you are storing member IDs in the leaderboard and
+you want to be able to store a member name for display. Example:
+
+``highscore_lb.rank_member('84849292', 1, username='member_name')``
+
+Retrieving members from the leaderboard
+---------------------------------------
+
+Get page 1 in the leaderboard:
+
+``highscore_lb.leaders(1)``
+
+You can pass various options to the calls `leaders`, `around_me` and `ranked_in_list`.
+Valid options are `:with_scores`, `:with_rank`, `:with_member_data`, `:use_zero_index_for_rank`
+and `:page_size`. Below is an example of retrieving the first page in the leaderboard
+without ranks:
+
+``highscore_lb.leaders(1, with_rank=False)``
