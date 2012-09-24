@@ -165,7 +165,7 @@ class Leaderboard(object):
 
         return None
 
-    def ranked_in_list(self, members, with_scores = True, use_zero_index_for_rank = False):
+    def ranked_in_list(self, members, with_scores = True, use_zero_index_for_rank = False, include_zero_ranks = True):
         ranks_for_members = []
 
         for member in members:
@@ -175,7 +175,10 @@ class Leaderboard(object):
             if with_scores:
                 data['score'] = self.score_for(member)
 
-            ranks_for_members.append(data)
+            if include_zero_ranks:
+                ranks_for_members.append(data)
+            elif data['rank']:
+                ranks_for_members.append(data)
 
         return ranks_for_members
 
